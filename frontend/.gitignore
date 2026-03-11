@@ -1,0 +1,34 @@
+# Dependencias
+node_modules/
+node_modules
+
+# Build
+build/
+dist/
+
+# Archivos de entorno
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de testing
+/coverage
+
+# Archivos de sistema
+.DS_Store
+
+# Archivos de entorno de editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos generados por Create React App (por defecto)
+# https://github.com/facebook/create-react-app/blob/main/packages/react-scripts/template/README.md#additional-notes

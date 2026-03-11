@@ -1,0 +1,14 @@
+# No ignorar los scripts SQL (queremos versionarlos)
+# Solo ignorar archivos de datos si los hubiera
+
+# Archivos de datos de base de datos
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos de backup
+*.backup
+*.bak
+
+# Archivos de logs de base de datos
+*.log
