@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 const Home = () => {
     return(
-        <Container classname="mt-5">
+        <Container className="mt-5">
             <Row className="text-center">
                 <Col>
                 <h1>Bienvenido a EL VITRAL</h1>
