@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Container, Form, Button, Card} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import api from '../services/api';
 
 const Register = () => {
     const [nombre, setNombre] = useState('');
@@ -8,16 +9,31 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if(password !== confirmPassword){
             alert("Las contraseñas no coinciden");
             return;
         }
-        console.log("Registro con:", { nombre, email, password});
-        //Aca ira la conexcion con backend
+
+        try {
+
+            const response = await api.post("/register", {
+                nombre,
+                email,
+                password
+            });
+
+            console.log("Registro con:", response.data);
+
+        } catch (error) {
+
+            console.error("Error en registro:", error);
+
+        }
     };
+
     return (
         <Container className="mt-5" style={{ maxWidth: '400px'}}>
             <Card>
@@ -56,6 +72,7 @@ const Register = () => {
                             required
                             />
                         </form.Group>
+
                         <form.Group className="mb-3" controlId="formConfirmPassword">
                             <form.Label>Confirman Contraseña</form.Label>
                             <form.control
@@ -66,10 +83,12 @@ const Register = () => {
                             required
                             />
                         </form.Group>
+
                         <Button variant="success" type="submit" className="w-100">
                             Registrarte
                         </Button>
                     </Form>
+
                     <div className="text-center mt-3">
                         ¿Ya tiene cuenta? <Link to="/login">Inicia sesion</Link>
                     </div>
@@ -79,4 +98,5 @@ const Register = () => {
         </Container>
     );
 };
+
 export default Register;

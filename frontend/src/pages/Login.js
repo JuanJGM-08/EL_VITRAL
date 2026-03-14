@@ -1,15 +1,29 @@
 import React, {useState}  from 'react';
 import { Container, Form, Button, Card} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import api from '../services/api';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState ('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Intento de login con:', { email, password});
-        //Se hara autenticacion 
+
+        try {
+
+            const response = await api.post("/login", {
+                email,
+                password
+            });
+
+            console.log('Intento de login con:', response.data);
+
+        } catch (error) {
+
+            console.error('Error en login:', error);
+
+        }
     };
 
 return (
@@ -24,7 +38,7 @@ return (
                         <Form.Label>Correo Electronico</Form.Label>
                         <Form.Control
                         type="email"
-                        placeholder="uiehcskuf@gmail.com"
+                        placeholder="Correo"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -35,7 +49,7 @@ return (
                         <form.Label>Contraseña</form.Label>
                         <form.control
                         type="password"
-                        placeholder="********"
+                        placeholder="Contraseña"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
