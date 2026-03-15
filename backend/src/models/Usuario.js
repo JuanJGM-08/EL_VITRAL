@@ -22,7 +22,7 @@ const Usuario = sequelize.define('Usuario', {
         allowNull: false
     },
     telefono: {
-        type: DataTypes.STRING(10)
+        type: DataTypes.STRING(20)
     },
     direccion: {
         type: DataTypes.TEXT
@@ -32,7 +32,7 @@ const Usuario = sequelize.define('Usuario', {
         defaultValue: 'usuario'
     },
     aprobado: {
-        type: DataTypes.DATE,
+        type: DataTypes.BOOLEAN,
         defaultValue: false
     },
     fecha_registro: {
