@@ -1,74 +1,85 @@
-import React, {useState} from 'react';
-import { Container, Form, Button, Card} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Form, Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { authService } from '../services/authService';
 
 const Login = () => {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+  const handleSubmit = async (e) => {
 
-        try {
+    e.preventDefault();
 
-            const response = await authService.login(email, password);
+    try {
 
-            console.log("Login:", response.data);
+      const response = await authService.login(email, password);
 
-        } catch (error) {
+      console.log("Login:", response.data);
 
-            console.error("Error en login:", error);
+      alert("Login correcto");
 
-        }
-    };
+    } catch (error) {
 
-return (
+      console.error("Error en login:", error);
+
+    }
+
+  };
+
+  return (
+
     <Container className="mt-5" style={{ maxWidth: '400px' }}>
-        <Card>
-            <Card.Header as="h4">Iniciar Sesion</Card.Header>
 
-            <Card.Body>
+      <Card>
 
-                <Form onSubmit={handleSubmit}>
+        <Card.Header as="h4">Iniciar Sesión</Card.Header>
 
-                    <Form.Group className="mb-3" controlId="formEmail">
-                        <Form.Label>Correo Electronico</Form.Label>
-                        <Form.Control
-                        type="email"
-                        placeholder="Correo"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        />
-                    </Form.Group>
+        <Card.Body>
 
-                    <Form.Group className="mb-3" controlId="formPassword">
-                        <Form.Label>Contraseña</Form.Label>
-                        <Form.Control
-                        type="password"
-                        placeholder="Contraseña"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        />
-                    </Form.Group>
+          <Form onSubmit={handleSubmit}>
 
-                    <Button variant="primary" type="submit" className="w-100">
-                        Ingresar
-                    </Button>
+            <Form.Group className="mb-3">
+              <Form.Label>Correo Electronico</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Correo"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-                </Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Contraseña</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Contraseña"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-                <div className="text-center mt-3">
-                    ¿No tienes cuenta? <Link to="/register">Regístrate</Link>
-                </div>
+            <Button variant="primary" type="submit" className="w-100">
+              Ingresar
+            </Button>
 
-            </Card.Body>
-        </Card>
+          </Form>
+
+          <div className="text-center mt-3">
+            ¿No tienes cuenta? <Link to="/register">Regístrate</Link>
+          </div>
+
+        </Card.Body>
+
+      </Card>
+
     </Container>
-);
+
+  );
+
 };
 
 export default Login;

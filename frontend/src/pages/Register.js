@@ -1,109 +1,114 @@
-import React, {useState} from 'react';
-import { Container, Form, Button, Card} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Form, Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { authService } from '../services/authService';
 
 const Register = () => {
 
-    const [nombre, setNombre] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-    const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
 
-        e.preventDefault();
+    e.preventDefault();
 
-        if(password !== confirmPassword){
-            alert("Las contraseñas no coinciden");
-            return;
-        }
+    if (password !== confirmPassword) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
 
-        try {
+    try {
 
-            const response = await authService.register(nombre, email, password);
+      const response = await authService.register(nombre, email, password);
 
-            console.log("Registro:", response.data);
+      console.log("Registro:", response.data);
 
-        } catch (error) {
+      alert("Usuario registrado correctamente");
 
-            console.error("Error en registro:", error);
+    } catch (error) {
 
-        }
+      console.error("Error en registro:", error);
 
-    };
+    }
 
-    return (
-        <Container className="mt-5" style={{ maxWidth: '400px'}}>
+  };
 
-            <Card>
+  return (
 
-                <Card.Header as="h4">Registro</Card.Header>
+    <Container className="mt-5" style={{ maxWidth: '400px' }}>
 
-                <Card.Body>
+      <Card>
 
-                    <Form onSubmit={handleSubmit}>
+        <Card.Header as="h4">Registro</Card.Header>
 
-                        <Form.Group className="mb-3">
-                            <Form.Label>Nombre</Form.Label>
-                            <Form.Control
-                            type="text"
-                            placeholder="Nombre"
-                            value={nombre}
-                            onChange={(e) => setNombre(e.target.value)}
-                            required
-                            />
-                        </Form.Group>
+        <Card.Body>
 
-                        <Form.Group className="mb-3">
-                            <Form.Label>Correo Electronico</Form.Label>
-                            <Form.Control
-                            type="email"
-                            placeholder="Correo"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            />
-                        </Form.Group>
+          <Form onSubmit={handleSubmit}>
 
-                        <Form.Group className="mb-3">
-                            <Form.Label>Contraseña</Form.Label>
-                            <Form.Control
-                            type="password"
-                            placeholder="Contraseña"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                            />
-                        </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Nombre</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Nombre"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-                        <Form.Group className="mb-3">
-                            <Form.Label>Confirmar Contraseña</Form.Label>
-                            <Form.Control
-                            type="password"
-                            placeholder="Confirmar contraseña"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
-                            />
-                        </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Correo Electronico</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Correo"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-                        <Button variant="success" type="submit" className="w-100">
-                            Registrarte
-                        </Button>
+            <Form.Group className="mb-3">
+              <Form.Label>Contraseña</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Contraseña"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-                    </Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Confirmar Contraseña</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Confirmar contraseña"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-                    <div className="text-center mt-3">
-                        ¿Ya tiene cuenta? <Link to="/login">Inicia sesion</Link>
-                    </div>
+            <Button variant="success" type="submit" className="w-100">
+              Registrarte
+            </Button>
 
-                </Card.Body>
+          </Form>
 
-            </Card>
+          <div className="text-center mt-3">
+            ¿Ya tiene cuenta? <Link to="/login">Inicia sesión</Link>
+          </div>
 
-        </Container>
-    );
+        </Card.Body>
+
+      </Card>
+
+    </Container>
+
+  );
+
 };
 
 export default Register;

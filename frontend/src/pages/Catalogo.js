@@ -2,16 +2,16 @@ import React, {useEffect, useState} from 'react';
 import {Container, Row, Col, Card, Spinner} from 'react-bootstrap';
 import { productoService } from '../services/productoService';
 
-const Catalogo =() => {
+const Catalogo = () => {
 
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() =>{
+    useEffect(() => {
 
         const cargarProductos = async () => {
 
-            try{
+            try {
 
                 const res = await productoService.listar();
 
@@ -21,7 +21,7 @@ const Catalogo =() => {
 
                 console.error("Error cargando productos:", error);
 
-            } finally{
+            } finally {
 
                 setLoading(false);
 
@@ -34,7 +34,7 @@ const Catalogo =() => {
     }, []);
 
     if (loading) {
-        return(
+        return (
             <Container className="text-center mt-5">
                 <Spinner animation="border" />
             </Container>

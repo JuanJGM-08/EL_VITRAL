@@ -35,7 +35,11 @@ const Cotizar = () => {
             setError('seleccione el producto y cantidad valida');
             return;
         }
-        const prod = productos.find(p => p.id === parseInt(productoActual.producto_id));
+        const prod = productos.find((p) => p.id === parseInt(productoActual.producto_id, 10));
+        if (!prod) {
+            setError('Producto no valido');
+            return;
+        }
         if ((prod.tipo === 'vidrio' || prod.tipo === 'espejo') && (!productoActual.medida_largo || !productoActual.medida_ancho)) {
             setError('Para vidrio o espejo debe ingresar medidas');
             return;
@@ -125,7 +129,7 @@ const Cotizar = () => {
                             </Row>
                             <Form.Group className="mb-2">
                                 <Form.Label>Cantidad</Form.Label>
-                                <Form.Control type="number" min="1" value={productoActual.cantidad} onChange={e => setProductoActual({...productoActual, cantidad: parseInt(e.target.value)})}/>
+                                <Form.Control type="number" min="1" value={productoActual.cantidad} onChange={e => setProductoActual({...productoActual, cantidad: parseInt(e.target.value, 10) || 0})}/>
                             </Form.Group>
                             <Button variant="primary" onClick={agregarItem}>Agregar</Button>
                         </Form>
