@@ -1,15 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-
 const sequelize = require('./src/config/database');
 const Producto = require('./src/models/Producto');
 const Cotizacion = require('./src/models/Cotizacion');
 const CotizacionDetalle = require('./src/models/CotizacionDetalle');
-
 const app = express();
-const PORT = process.env.PORT || 3001;
-
+const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
@@ -80,6 +77,10 @@ app.post('/api/cotizaciones', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Servidor escuchando en puerto ${PORT}`);
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
+
+const dotenv = require('dotenv');
+const { sequelize } = require('./src/models');
+
+dotenv.config();

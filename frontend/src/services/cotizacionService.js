@@ -1,5 +1,10 @@
 import api from './api';
 
 export const cotizacionService = {
-  crear: (payload) => api.post('/cotizaciones', payload),
+    crearCotizacion(datos) {
+        return api.post("/cotizaciones", datos);
+    },
+    listarCotizaciones() {
+        return api.get("/cotizaciones");
+    }
 };
