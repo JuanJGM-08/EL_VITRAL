@@ -1,8 +1,16 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {Navbar, Nav, Container} from 'react-bootstrap';
+import {Link, useNavigate} from 'react-router-dom';
+import {Navbar, Nav, Container, Button} from 'react-bootstrap';
+import {useAuth} from '../contexts/AuthContext';
 
 const Navegacion = () => {
+    const {usuario, logout} = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () =>{
+        logout();
+        navigate('/');
+    }
     return (
         <Navbar bg="light" expand="lg">
             <Container>
@@ -13,10 +21,21 @@ const Navegacion = () => {
                         <Nav.Link as={Link} to="/">Inicio</Nav.Link> 
                         <Nav.Link as={Link} to="/catalogo">Catalogo</Nav.Link>
                         <Nav.Link as={Link} to="/cotizar">Cotizar</Nav.Link>
+                        {usuaio && <Nav.Link as={Link} to="/mis-pedidos">Mis Pedidos</Nav.Link>}
+                        {usuario?.rol === 'admin' && <Nav.Link as={Link} to="/admin">Admin</Nav.Link>}
                     </Nav>
                     <Nav>
-                        <Nav.Link as={Link} to="/login">Iniciar Sesion</Nav.Link>
-                        <Nav.Link as={Link} to="/registro">Registrarse</Nav.Link>
+                        {usuario ? (
+                            <>
+                            <Navbar.Text className="me-2">Hola, {usuario.nombre}</Navbar.Text>
+                            <Button variant="outline-secondary" size="sm" onClick={handleLogout}>Cerrar Sesion</Button>
+                            </>
+                        ) : (
+                            <>
+                            <Nav.Link as={Link} to="/login">Iniciar Sesion</Nav.Link>
+                            <Nav.Link as={Link} to="/registro">Registrarse</Nav.Link>
+                            </>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
@@ -24,4 +43,4 @@ const Navegacion = () => {
     );
 };
 
-export default Navigation;
+export default Navegacion;
