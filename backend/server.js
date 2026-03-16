@@ -79,8 +79,3 @@ app.post('/api/cotizaciones', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
-
-const dotenv = require('dotenv');
-const { sequelize } = require('./src/models');
-
-dotenv.config();
