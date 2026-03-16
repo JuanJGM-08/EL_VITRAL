@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Catalogo from "./pages/Catalogo";
 import Cotizar from "./pages/Cotizar";
+import Admin from "./pages/Admin";
 
 function App() {
 
@@ -27,6 +28,8 @@ function App() {
         <Route path="/catalogo" element={<Catalogo />} />
 
         <Route path="/cotizar" element={<Cotizar />} />
+
+        <Route path="/admin" element={<Admin />} />
 
       </Routes>
 
